@@ -10,7 +10,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: '盘长顾问',
+  title: '盘厂顾问',
   pwa: true,
   iconfontUrl: '',
 };
