@@ -6,7 +6,7 @@ export default {
   'menu.register': '注册',
   'menu.register.result': '注册结果',
   'menu.dashboard': '看板',
-  'menu.overview': '项目概览',
+  'menu.project-overview': '项目总览',
   'menu.process': '工序',
   'menu.project-details': '项目详情',
   'menu.exception.403': '403',

@@ -130,7 +130,7 @@ class Analysis extends Component {
         </Dropdown>
       </span>
     );
-    const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
+    // const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
     return (
       <GridContent>
         <React.Fragment>
@@ -176,7 +176,7 @@ class Analysis extends Component {
               </Suspense>
             </Col>
           </Row>
-          <Suspense fallback={null}>
+          {/* <Suspense fallback={null}>
             <OfflineData
               activeKey={activeKey}
               loading={loading}
@@ -184,7 +184,7 @@ class Analysis extends Component {
               offlineChartData={offlineChartData}
               handleTabChange={this.handleTabChange}
             />
-          </Suspense>
+          </Suspense> */}
         </React.Fragment>
       </GridContent>
     );

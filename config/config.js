@@ -6,7 +6,6 @@ const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
-const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
 const plugins = [
   [
     'umi-plugin-react',
@@ -54,21 +53,6 @@ const plugins = [
   ],
 ]; // 针对 preview.pro.ant.design 的 GA 统计代码
 
-if (isAntDesignProPreview) {
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
-  plugins.push([
-    'umi-plugin-pro',
-    {
-      serverUrl: 'https://ant-design-pro.netlify.com',
-    },
-  ]);
-}
-
 export default {
   plugins,
   block: {
@@ -80,7 +64,7 @@ export default {
   targets: {
     ie: 11,
   },
-  devtool: isAntDesignProPreview ? 'source-map' : false,
+  devtool: false,
   // umi routes: https://umijs.org/zh/guide/router.html
   routes: [
     {
@@ -125,22 +109,25 @@ export default {
           authority: ['admin', 'user'],
           routes: [
             {
-              name: 'overview',
+              name: 'project-overview',
               icon: 'profile',
-              path: '/dashboard/analysis',
+              path: '/project-overview',
               component: './dashboard/analysis',
             },
             {
               name: 'process',
               icon: 'sliders',
-              path: '/dashboard/monitor',
+              path: '/process',
               component: './dashboard/monitor',
             },
             {
               name: 'project-details',
               icon: 'schedule',
-              path: '/dashboard/workplace',
+              path: '/project-details',
               component: './dashboard/workplace',
+            },
+            {
+              redirect: 'project-overview',
             },
           ],
           // routes: [
