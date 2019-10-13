@@ -10,7 +10,8 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
+import logoLarge from '../assets/logo-large.svg';
 
 /**
  * use Authorized check all menu item
@@ -29,7 +30,7 @@ const footerRender = () => (
 );
 
 const BasicLayout = props => {
-  const { dispatch, children, settings } = props;
+  const { dispatch, children, settings, collapsed } = props;
   /**
    * constructor
    */
@@ -59,7 +60,7 @@ const BasicLayout = props => {
 
   return (
     <ProLayout
-      logo={logo}
+      logo={collapsed ? logo : logoLarge}
       onCollapse={handleMenuCollapse}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl) {
