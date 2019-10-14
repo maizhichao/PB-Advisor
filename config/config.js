@@ -108,25 +108,25 @@ export default {
           authority: ['admin', 'user'],
           routes: [
             {
-              name: 'project-overview',
+              name: 'project.overview',
               icon: 'profile',
-              path: '/project-overview',
-              component: './dashboard/analysis',
+              path: '/project/overview',
+              component: './project-management/overview',
             },
             {
-              name: 'process',
+              name: 'project.workflow',
               icon: 'sliders',
-              path: '/process',
-              component: './dashboard/monitor',
+              path: '/project/workflow',
+              component: './project-management/workflow',
             },
             {
-              name: 'project-details',
+              name: 'project.details',
               icon: 'schedule',
-              path: '/project-details',
-              component: './dashboard/workplace',
+              path: '/project/details',
+              component: './project-management/details',
             },
             {
-              redirect: 'project-overview',
+              redirect: 'project/overview',
             },
           ],
           // routes: [
