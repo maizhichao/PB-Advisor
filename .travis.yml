@@ -50,4 +50,4 @@ deploy:
     on:
       all_branches: true
     script:
-      - - ./upload.sh ./${ARTIFACT_NAME} ${PROJECT} ${TRAVIS_BRANCH} ${ROLE} ${PACKAGE_VERSION} ${OSS_BUCKET} ${OSS_KEY} ${OSS_SECRET} && docker push $REMOTE_TAG && docker push $REMOTE_TAG_LATEST
+      - ./upload.sh ./${ARTIFACT_NAME} ${PROJECT} ${TRAVIS_BRANCH} ${ROLE} ${PACKAGE_VERSION} ${OSS_BUCKET} ${OSS_KEY} ${OSS_SECRET} && docker push $REMOTE_TAG && docker push $REMOTE_TAG_LATEST
