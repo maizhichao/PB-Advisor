@@ -29,8 +29,10 @@ before_script:
 
 script:
   - echo ${ARTIFACT_NAME}
-  - echo -n "${PACKAGE_VERSION}" > ./version.txt
-  - zip ${ARTIFACT_NAME} version.txt
+  - mkdir build
+  - cp ./{compose-template.yml,deployment.yaml} build/
+  - echo -n "${PACKAGE_VERSION}" > ./build/version.txt
+  - cd build && zip -r ../${ARTIFACT_NAME} ./ && cd ..
   - ls -la
   - docker build -t $TAG .
 
