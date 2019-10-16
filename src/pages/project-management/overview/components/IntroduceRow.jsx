@@ -1,11 +1,24 @@
-import { Col, Icon, Row, Tooltip } from 'antd';
+import { Col, Icon, Row, Tooltip, Statistic } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
 import numeral from 'numeral';
 import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from './Charts';
 import Trend from './Trend';
-import Yuan from '../utils/Yuan';
 import styles from '../style.less';
+
+const ExtraContent = () => (
+  <div className={styles.extraContent}>
+    <div className={styles.statItem}>
+      <Statistic title="项目数" value={56} />
+    </div>
+    <div className={styles.statItem}>
+      <Statistic title="团队内排名" value={8} suffix="/ 24" />
+    </div>
+    <div className={styles.statItem}>
+      <Statistic title="项目访问" value={2223} />
+    </div>
+  </div>
+);
 
 const topColResponsiveProps = {
   xs: 24,
@@ -23,55 +36,27 @@ const IntroduceRow = ({ loading, visitData }) => (
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title={
-          <FormattedMessage
-            id="dashboardandanalysis.analysis.total-sales"
-            defaultMessage="Total Sales"
-          />
-        }
+        title="项目总数"
         action={
-          <Tooltip
-            title={
-              <FormattedMessage
-                id="dashboardandanalysis.analysis.introduce"
-                defaultMessage="Introduce"
-              />
-            }
-          >
+          <Tooltip title="未开始或正在执行中的项目总数">
             <Icon type="info-circle-o" />
           </Tooltip>
         }
         loading={loading}
-        total={() => <Yuan>126560</Yuan>}
-        footer={
-          <Field
-            label={
-              <FormattedMessage
-                id="dashboardandanalysis.analysis.day-sales"
-                defaultMessage="Daily Sales"
-              />
-            }
-            value={`￥${numeral(12423).format('0,0')}`}
-          />
-        }
-        contentHeight={46}
+        total={() => 89}
+        contentHeight={77.6}
       >
-        <Trend
-          flag="up"
-          style={{
-            marginRight: 16,
-          }}
-        >
-          <FormattedMessage
-            id="dashboardandanalysis.analysis.week"
-            defaultMessage="Weekly Changes"
-          />
-          <span className={styles.trendText}>12%</span>
-        </Trend>
-        <Trend flag="down">
-          <FormattedMessage id="dashboardandanalysis.analysis.day" defaultMessage="Daily Changes" />
-          <span className={styles.trendText}>11%</span>
-        </Trend>
+        <div className={styles.extraContent}>
+          <div className={styles.statItem}>
+            <Statistic title="生产" value={56} valueStyle={{ color: '#3DCD58' }} />
+          </div>
+          <div className={styles.statItem}>
+            <Statistic title="待生产" value={8} />
+          </div>
+          <div className={styles.statItem}>
+            <Statistic title="异常" value={2} valueStyle={{ color: '#cf1322' }} />
+          </div>
+        </div>
       </ChartCard>
     </Col>
 

@@ -1,5 +1,62 @@
 @import '~antd/es/style/themes/default.less';
 
+// mixins for clearfix
+// ------------------------
+.clearfix() {
+  zoom: 1;
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+  &::after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+.extraContent {
+  .clearfix();
+
+  float: right;
+  white-space: nowrap;
+  .statItem {
+    position: relative;
+    display: inline-block;
+    padding: 0 38px;
+    > p:first-child {
+      color: @text-color-secondary;
+      font-size: 10px;
+    }
+    > p {
+      margin: 0;
+      color: @heading-color;
+      font-size: 12px;
+      > span {
+        color: @text-color-secondary;
+        font-size: 12px;
+      }
+    }
+    &::after {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background-color: @border-color-split;
+      content: '';
+    }
+    &:last-child {
+      padding-right: 0;
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
 .iconGroup {
   i {
     margin-left: 16px;

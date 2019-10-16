@@ -1,5 +1,4 @@
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
-
 import slash from 'slash2';
 import webpackPlugin from './plugin.config';
 const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
@@ -101,12 +100,67 @@ export default {
             },
           ],
         },
+
         {
           path: '/',
           component: '../layouts/BasicLayout',
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
+            {
+              path: '/list',
+              icon: 'table',
+              name: 'list',
+              routes: [
+                {
+                  path: '/list/search',
+                  name: 'search-list',
+                  component: './list/search',
+                  routes: [
+                    {
+                      path: '/list/search',
+                      redirect: '/list/search/articles',
+                    },
+                    {
+                      name: 'articles',
+                      icon: 'smile',
+                      path: '/list/search/articles',
+                      component: './list/search/articles',
+                    },
+                    {
+                      name: 'projects',
+                      icon: 'smile',
+                      path: '/list/search/projects',
+                      component: './list/search/projects',
+                    },
+                    {
+                      name: 'applications',
+                      icon: 'smile',
+                      path: '/list/search/applications',
+                      component: './list/search/applications',
+                    },
+                  ],
+                },
+                {
+                  name: 'table-list',
+                  icon: 'smile',
+                  path: '/list/table-list',
+                  component: './list/table-list',
+                },
+                {
+                  name: 'basic-list',
+                  icon: 'smile',
+                  path: '/list/basic-list',
+                  component: './list/basic-list',
+                },
+                {
+                  name: 'card-list',
+                  icon: 'smile',
+                  path: '/list/card-list',
+                  component: './list/card-list',
+                },
+              ],
+            },
             {
               name: 'project.overview',
               icon: 'profile',
@@ -312,7 +366,65 @@ export default {
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': primaryColor,
+    '@font-size-sm': '14px',
+    '@font-size-base': '14px',
+    '@primary-color': primaryColor,
+    '@border-radius-base': '0',
+    '@border-radius-sm': '0',
+    '@text-color': 'fade(#000, 65%)',
+    '@text-color-secondary': 'fade(#000, 45%)',
+    '@background-color-base': 'hsv(0, 0, 96%)',
+    '@success-color': primaryColor,
+    '@error-color': '#d93026',
+    '@warning-color': '#ffc440',
+    '@info-color': '@primary-color',
+    '@danger-color': '@error-color',
+    '@processing-color': '@primary-color',
+    '@border-color-base': '#dedede',
+    '@border-color-split': '#dedede',
+    '@outline-width': '0',
+    '@outline-color': '#737373',
+    '@input-height-lg': '36px',
+    '@input-height-base': '32px',
+    '@input-height-sm': '24px',
+    '@input-hover-border-color': '#737373',
+    '@form-item-margin-bottom': '16px',
+    '@btn-default-bg': '#fafafa',
+    '@btn-default-border': '#dedede',
+    '@btn-danger-color': '#fff',
+    '@btn-danger-bg': '@error-color',
+    '@btn-danger-border': '@error-color',
+    '@switch-color': '@success-color',
+    '@table-header-bg': '#fafafa',
+    '@table-row-hover-bg': '#fafafa',
+    '@table-padding-vertical': '8px',
+    '@badge-color': '@error-color',
+    '@breadcrumb-base-color': '@text-color',
+    '@breadcrumb-last-item-color': '@text-color-secondary',
+    '@slider-rail-background-color': '@background-color-base',
+    '@slider-rail-background-color-hover': '#e1e1e1',
+    '@slider-track-background-color': '@primary-color',
+    '@slider-track-background-color-hover': '@primary-color',
+    '@slider-handle-border-width': '1px',
+    '@slider-handle-color': '#dedede',
+    '@slider-handle-color-hover': '#dedede',
+    '@slider-handle-color-focus': '#dedede',
+    '@slider-handle-color-tooltip-open': '#ddd',
+    '@slider-handle-color-focus-shadow': 'transparent',
+    '@slider-handle-shadow': '1px 1px 4px 0 rgba(0,0,0,.13)',
+    '@alert-success-border-color': '#dff4e5',
+    '@alert-success-bg-color': '#dff4e5',
+    '@alert-info-border-color': '#e5f3ff',
+    '@alert-info-bg-color': '#e5f3ff',
+    '@alert-error-border-color': '#fcebea',
+    '@alert-error-bg-color': '#fcebea',
+    '@alert-warning-border-color': '#fff7db',
+    '@alert-warning-bg-color': '#fff7db',
+    '@radio-button-bg': 'transparent',
+    '@radio-button-checked-bg': 'transparent',
+    '@progress-radius': '0',
+    '@tabs-card-gutter': '-1px',
+    '@tabs-card-tab-active-border-top': '2px solid @primary-color',
   },
   define: {
     // Define env variables
@@ -351,6 +463,9 @@ export default {
     basePath: '/',
   },
   chainWebpack: webpackPlugin,
+  devServer: {
+    open: false,
+  },
   /*
   proxy: {
     '/server/api/': {
