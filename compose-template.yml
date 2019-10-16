@@ -23,5 +23,5 @@
   mem_limit: 0
   shm_size: 0
   labels:
-    aliyun.scale: '${TIGER_SCALE}'
+    aliyun.scale: '2'
     aliyun.log_store_tiger: '/opt/tiger/logs/*.log'
