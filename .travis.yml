@@ -29,13 +29,15 @@ before_script:
 
 script:
   - echo ${PACKAGE_VERSION}
+  -
   - ls -la
   - docker build -t $TAG .
 
 before_deploy:
-  - 'curl -o upload.sh -H "Authorization: token ${GITHUB_TOKEN}" ${GITHUB_UPLOAD_SCRIPT}'
-  - chmod a+x ./upload.sh
   - echo ${ARTIFACT_NAME}
+  - echo -n "${PACKAGE_VERSION}" > ./version.txt
+  - zip ${ARTIFACT_NAME} version.txt
+  - ls -larth
   - IMAGEID=$(docker images $TAG -q)
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" $DOCKER_REGISTRY
   - docker tag $IMAGEID $REMOTE_TAG
@@ -48,4 +50,4 @@ deploy:
     on:
       all_branches: true
     script:
-      - docker push $REMOTE_TAG && docker push $REMOTE_TAG_LATEST
+      - - ./upload.sh ./${ARTIFACT_NAME} ${PROJECT} ${TRAVIS_BRANCH} ${ROLE} ${PACKAGE_VERSION} ${OSS_BUCKET} ${OSS_KEY} ${OSS_SECRET} && docker push $REMOTE_TAG && docker push $REMOTE_TAG_LATEST
