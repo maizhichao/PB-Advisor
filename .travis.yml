@@ -28,15 +28,15 @@ before_script:
   - export REMOTE_TAG_LATEST=$DOCKER_REGISTRY/$DOCKER_NS/$TAG_LATEST
 
 script:
-  - echo ${PACKAGE_VERSION}
-  -
+  - echo ${ARTIFACT_NAME}
+  - echo -n "${PACKAGE_VERSION}" > ./version.txt
+  - zip ${ARTIFACT_NAME} version.txt
   - ls -la
   - docker build -t $TAG .
 
 before_deploy:
-  - echo ${ARTIFACT_NAME}
-  - echo -n "${PACKAGE_VERSION}" > ./version.txt
-  - zip ${ARTIFACT_NAME} version.txt
+  - 'curl -o upload.sh -H "Authorization: token ${GITHUB_TOKEN}" ${GITHUB_UPLOAD_SCRIPT}'
+  - chmod a+x ./upload.sh
   - ls -larth
   - IMAGEID=$(docker images $TAG -q)
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" $DOCKER_REGISTRY
