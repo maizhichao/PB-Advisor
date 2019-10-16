@@ -2,7 +2,7 @@
   restart: always
   image: '{DOCKER:IMAGE_FULL_NAME:Tiger}'
   ports:
-    - 9081:8888
+    - 9081:3000
   dns:
     - '${DNS_HOST_1}'
     - '${DNS_HOST_2}'

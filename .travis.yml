@@ -14,7 +14,7 @@ cache:
 
 env:
   global:
-    - PROJECT="PBAdvisor"
+    - PROJECT="Tiger"
     - ROLE="WebServer"
     - PACKAGE_VERSION="v1.0.${TRAVIS_BUILD_NUMBER}"
     - DOCKER_NS="se-rem-test"
