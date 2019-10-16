@@ -28,7 +28,7 @@ spec:
         - name: BROWSER
           value: none
         - name: PORT
-          value: 8888
+          value: "8888"
         - name: NPM_CONFIG_LOGLEVEL
           value: info
         - name: TIGER_HOST
