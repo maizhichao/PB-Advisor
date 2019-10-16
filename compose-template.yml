@@ -2,7 +2,7 @@
   restart: always
   image: '{DOCKER:IMAGE_FULL_NAME:Tiger}'
   ports:
-    - 9081:3000
+    - 9081:8888
   dns:
     - '${DNS_HOST_1}'
     - '${DNS_HOST_2}'
@@ -14,6 +14,7 @@
   environment:
     - NODE_ENV=production
     - BROWSER=none
+    - PORT=8888
     - NPM_CONFIG_LOGLEVEL=info
     - TIGER_HOST=${TIGER_HOST}
   memswap_limit: 0
