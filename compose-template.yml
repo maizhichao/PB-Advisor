@@ -1,6 +1,6 @@
-{ DOCKER:APP_NAME:PBAdvisor }:
+{ DOCKER:APP_NAME:Tiger }:
   restart: always
-  image: '{DOCKER:IMAGE_FULL_NAME:PBAdvisor}'
+  image: '{DOCKER:IMAGE_FULL_NAME:Tiger}'
   ports:
     - 9081:8888
   dns:
@@ -23,4 +23,4 @@
   shm_size: 0
   labels:
     aliyun.scale: '${TIGER_SCALE}'
-    aliyun.log_store_pbadvisor: '/opt/pbadvisor/logs/*.log'
+    aliyun.log_store_tiger: '/opt/tiger/logs/*.log'
