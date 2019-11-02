@@ -45,6 +45,7 @@ export default class HeaderSearch extends Component {
       this.debouncePressEnter();
     }
   };
+
   onChange = value => {
     if (typeof value === 'string') {
       const { onSearch, onChange } = this.props;

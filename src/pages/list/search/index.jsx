@@ -8,8 +8,7 @@ import router from 'umi/router';
 class Search extends Component {
   handleTabChange = key => {
     const { match } = this.props;
-    const url = match.url === '/' ? '' : match.url;
-
+    const url = match.url === 'other/' ? '' : match.url;
     switch (key) {
       case 'articles':
         router.push(`${url}/articles`);
