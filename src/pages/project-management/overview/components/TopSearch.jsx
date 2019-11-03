@@ -9,23 +9,20 @@ import styles from '../style.less';
 
 const columns = [
   {
-    title: <FormattedMessage id="dashboardandanalysis.table.rank" defaultMessage="Rank" />,
+    title: <FormattedMessage id="projectOverview.table.rank" defaultMessage="Rank" />,
     dataIndex: 'index',
     key: 'index',
   },
   {
     title: (
-      <FormattedMessage
-        id="dashboardandanalysis.table.search-keyword"
-        defaultMessage="Search keyword"
-      />
+      <FormattedMessage id="projectOverview.table.search-keyword" defaultMessage="Search keyword" />
     ),
     dataIndex: 'keyword',
     key: 'keyword',
     render: text => <a href="/">{text}</a>,
   },
   {
-    title: <FormattedMessage id="dashboardandanalysis.table.users" defaultMessage="Users" />,
+    title: <FormattedMessage id="projectOverview.table.users" defaultMessage="Users" />,
     dataIndex: 'count',
     key: 'count',
     sorter: (a, b) => a.count - b.count,
@@ -33,10 +30,7 @@ const columns = [
   },
   {
     title: (
-      <FormattedMessage
-        id="dashboardandanalysis.table.weekly-range"
-        defaultMessage="Weekly Range"
-      />
+      <FormattedMessage id="projectOverview.table.weekly-range" defaultMessage="Weekly Range" />
     ),
     dataIndex: 'range',
     key: 'range',
@@ -61,7 +55,7 @@ const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
     bordered={false}
     title={
       <FormattedMessage
-        id="dashboardandanalysis.analysis.online-top-search"
+        id="projectOverview.analysis.online-top-search"
         defaultMessage="Online Top Search"
       />
     }
@@ -82,13 +76,13 @@ const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
           subTitle={
             <span>
               <FormattedMessage
-                id="dashboardandanalysis.analysis.search-users"
+                id="projectOverview.analysis.search-users"
                 defaultMessage="search users"
               />
               <Tooltip
                 title={
                   <FormattedMessage
-                    id="dashboardandanalysis.analysis.introduce"
+                    id="projectOverview.analysis.introduce"
                     defaultMessage="introduce"
                   />
                 }
@@ -120,13 +114,13 @@ const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
           subTitle={
             <span>
               <FormattedMessage
-                id="dashboardandanalysis.analysis.per-capita-search"
+                id="projectOverview.analysis.per-capita-search"
                 defaultMessage="Per Capita Search"
               />
               <Tooltip
                 title={
                   <FormattedMessage
-                    id="dashboardandanalysis.analysis.introduce"
+                    id="projectOverview.analysis.introduce"
                     defaultMessage="introduce"
                   />
                 }

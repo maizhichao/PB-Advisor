@@ -40,3 +40,33 @@ export interface AnalysisData {
   salesTypeDataOffline: VisitDataType[];
   radarData: RadarData[];
 }
+
+export interface Member {
+  avatar: string;
+  name: string;
+  id: string;
+}
+
+export interface BasicListItemDataType {
+  id: string;
+  owner: string;
+  title: string;
+  avatar: string;
+  cover: string;
+  status: 'normal' | 'exception' | 'active' | 'success';
+  percent: number;
+  logo: string;
+  href: string;
+  body?: any;
+  updatedAt: number;
+  createdAt: number;
+  subDescription: string;
+  description: string;
+  activeUser: number;
+  newUser: number;
+  star: number;
+  like: number;
+  message: number;
+  content: string;
+  members: Member[];
+}

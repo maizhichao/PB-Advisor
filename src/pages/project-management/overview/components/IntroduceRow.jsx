@@ -1,8 +1,7 @@
-import { Col, Icon, Row, Tooltip, Statistic, Card } from 'antd';
+import { Col, Icon, Row, Tooltip, Statistic, Card, Progress } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
-import numeral from 'numeral';
-import { ChartCard, Pie, MiniBar, MiniProgress, Field } from './Charts';
+import { ChartCard } from './Charts';
 import Trend from './Trend';
 import styles from '../style.less';
 
@@ -54,7 +53,7 @@ const IntroduceRow = ({ loading, visitData }) => (
           <Tooltip
             title={
               <FormattedMessage
-                id="dashboardandanalysis.analysis.introduce"
+                id="projectOverview.analysis.introduce"
                 defaultMessage="Introduce"
               />
             }
@@ -83,7 +82,7 @@ const IntroduceRow = ({ loading, visitData }) => (
         }
         contentHeight={46}
       >
-        <MiniProgress percent={78} strokeWidth={8} target={80} color="#3DCD58" />
+        <Progress percent={78} status="active" strokeWidth={12} />
       </ChartCard>
     </Col>
     <Col {...topColResponsiveProps}>
@@ -95,7 +94,7 @@ const IntroduceRow = ({ loading, visitData }) => (
           <Tooltip
             title={
               <FormattedMessage
-                id="dashboardandanalysis.analysis.introduce"
+                id="projectOverview.analysis.introduce"
                 defaultMessage="Introduce"
               />
             }

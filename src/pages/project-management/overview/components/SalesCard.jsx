@@ -13,7 +13,7 @@ for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: formatMessage(
       {
-        id: 'dashboardandanalysis.analysis.test',
+        id: 'projectOverview.analysis.test',
       },
       {
         no: i,
@@ -44,26 +44,23 @@ const SalesCard = ({
           <div className={styles.salesExtraWrap}>
             <div className={styles.salesExtra}>
               <a className={isActive('today')} onClick={() => selectDate('today')}>
-                <FormattedMessage
-                  id="dashboardandanalysis.analysis.all-day"
-                  defaultMessage="All Day"
-                />
+                <FormattedMessage id="projectOverview.analysis.all-day" defaultMessage="All Day" />
               </a>
               <a className={isActive('week')} onClick={() => selectDate('week')}>
                 <FormattedMessage
-                  id="dashboardandanalysis.analysis.all-week"
+                  id="projectOverview.analysis.all-week"
                   defaultMessage="All Week"
                 />
               </a>
               <a className={isActive('month')} onClick={() => selectDate('month')}>
                 <FormattedMessage
-                  id="dashboardandanalysis.analysis.all-month"
+                  id="projectOverview.analysis.all-month"
                   defaultMessage="All Month"
                 />
               </a>
               <a className={isActive('year')} onClick={() => selectDate('year')}>
                 <FormattedMessage
-                  id="dashboardandanalysis.analysis.all-year"
+                  id="projectOverview.analysis.all-year"
                   defaultMessage="All Year"
                 />
               </a>
@@ -83,7 +80,7 @@ const SalesCard = ({
         }}
       >
         <TabPane
-          tab={<FormattedMessage id="dashboardandanalysis.analysis.sales" defaultMessage="Sales" />}
+          tab={<FormattedMessage id="projectOverview.analysis.sales" defaultMessage="Sales" />}
           key="sales"
         >
           <Row type="flex">
@@ -93,7 +90,7 @@ const SalesCard = ({
                   height={295}
                   title={
                     <FormattedMessage
-                      id="dashboardandanalysis.analysis.sales-trend"
+                      id="projectOverview.analysis.sales-trend"
                       defaultMessage="Sales Trend"
                     />
                   }
@@ -105,7 +102,7 @@ const SalesCard = ({
               <div className={styles.salesRank}>
                 <h4 className={styles.rankingTitle}>
                   <FormattedMessage
-                    id="dashboardandanalysis.analysis.sales-ranking"
+                    id="projectOverview.analysis.sales-ranking"
                     defaultMessage="Sales Ranking"
                   />
                 </h4>
@@ -129,9 +126,7 @@ const SalesCard = ({
           </Row>
         </TabPane>
         <TabPane
-          tab={
-            <FormattedMessage id="dashboardandanalysis.analysis.visits" defaultMessage="Visits" />
-          }
+          tab={<FormattedMessage id="projectOverview.analysis.visits" defaultMessage="Visits" />}
           key="views"
         >
           <Row>
@@ -141,7 +136,7 @@ const SalesCard = ({
                   height={292}
                   title={
                     <FormattedMessage
-                      id="dashboardandanalysis.analysis.visits-trend"
+                      id="projectOverview.analysis.visits-trend"
                       defaultMessage="Visits Trend"
                     />
                   }
@@ -153,7 +148,7 @@ const SalesCard = ({
               <div className={styles.salesRank}>
                 <h4 className={styles.rankingTitle}>
                   <FormattedMessage
-                    id="dashboardandanalysis.analysis.visits-ranking"
+                    id="projectOverview.analysis.visits-ranking"
                     defaultMessage="Visits Ranking"
                   />
                 </h4>

@@ -19,7 +19,7 @@ const CustomTab = ({ data, currentTabKey: currentKey }) => (
         title={data.name}
         subTitle={
           <FormattedMessage
-            id="dashboardandanalysis.analysis.conversion-rate"
+            id="projectOverview.analysis.conversion-rate"
             defaultMessage="Conversion Rate"
           />
         }
@@ -70,10 +70,10 @@ const OfflineData = ({ activeKey, loading, offlineData, offlineChartData, handle
               data={offlineChartData}
               titleMap={{
                 y1: formatMessage({
-                  id: 'dashboardandanalysis.analysis.traffic',
+                  id: 'projectOverview.analysis.traffic',
                 }),
                 y2: formatMessage({
-                  id: 'dashboardandanalysis.analysis.payments',
+                  id: 'projectOverview.analysis.payments',
                 }),
               }}
             />

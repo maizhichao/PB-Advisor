@@ -18,7 +18,7 @@ const ProportionSales = ({
     bordered={false}
     title={
       <FormattedMessage
-        id="dashboardandanalysis.analysis.the-proportion-of-sales"
+        id="projectOverview.analysis.the-proportion-of-sales"
         defaultMessage="The Proportion of Sales"
       />
     }
@@ -31,13 +31,13 @@ const ProportionSales = ({
         <div className={styles.salesTypeRadio}>
           <Radio.Group value={salesType} onChange={handleChangeSalesType}>
             <Radio.Button value="all">
-              <FormattedMessage id="dashboardandanalysis.channel.all" defaultMessage="ALL" />
+              <FormattedMessage id="projectOverview.channel.all" defaultMessage="ALL" />
             </Radio.Button>
             <Radio.Button value="online">
-              <FormattedMessage id="dashboardandanalysis.channel.online" defaultMessage="Online" />
+              <FormattedMessage id="projectOverview.channel.online" defaultMessage="Online" />
             </Radio.Button>
             <Radio.Button value="stores">
-              <FormattedMessage id="dashboardandanalysis.channel.stores" defaultMessage="Stores" />
+              <FormattedMessage id="projectOverview.channel.stores" defaultMessage="Stores" />
             </Radio.Button>
           </Radio.Group>
         </div>
@@ -51,13 +51,11 @@ const ProportionSales = ({
           marginBottom: 32,
         }}
       >
-        <FormattedMessage id="dashboardandanalysis.analysis.sales" defaultMessage="Sales" />
+        <FormattedMessage id="projectOverview.analysis.sales" defaultMessage="Sales" />
       </h4>
       <Pie
         hasLegend
-        subTitle={
-          <FormattedMessage id="dashboardandanalysis.analysis.sales" defaultMessage="Sales" />
-        }
+        subTitle={<FormattedMessage id="projectOverview.analysis.sales" defaultMessage="Sales" />}
         total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
         data={salesPieData}
         valueFormat={value => <Yuan>{value}</Yuan>}
