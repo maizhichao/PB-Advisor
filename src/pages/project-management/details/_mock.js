@@ -52,5 +52,5 @@ const getProfileAdvancedData = {
   advancedOperation1,
 };
 export default {
-  'GET  /api/profile/advanced': getProfileAdvancedData,
+  'GET  /api/project/details': getProfileAdvancedData,
 };

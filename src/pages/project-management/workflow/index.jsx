@@ -74,9 +74,9 @@ const workflowSteps = [
   },
 ];
 
-@connect(({ profileAndadvanced, loading }) => ({
-  profileAndadvanced,
-  loading: loading.effects['profileAndadvanced/fetchAdvanced'],
+@connect(({ projectWorkflow, loading }) => ({
+  projectWorkflow,
+  loading: loading.effects['projectWorkflow/fetchAdvanced'],
 }))
 class Advanced extends Component {
   state = {
@@ -86,7 +86,7 @@ class Advanced extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'profileAndadvanced/fetchAdvanced',
+      type: 'projectWorkflow/fetchAdvanced',
     });
   }
 
@@ -95,8 +95,8 @@ class Advanced extends Component {
   };
 
   render() {
-    const { profileAndadvanced, loading } = this.props;
-    const { advancedOperation1 } = profileAndadvanced;
+    const { projectWorkflow, loading } = this.props;
+    const { advancedOperation1 } = projectWorkflow;
 
     return (
       <PageHeaderWrapper className={styles.pageHeader}>

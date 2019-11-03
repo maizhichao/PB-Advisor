@@ -1,7 +1,7 @@
-import { queryAdvancedProfile } from './service';
+import { queryProjectWorkflow } from './service';
 
 const Model = {
-  namespace: 'profileAndadvanced',
+  namespace: 'projectWorkflow',
   state: {
     advancedOperation1: [],
     advancedOperation2: [],
@@ -9,7 +9,7 @@ const Model = {
   },
   effects: {
     *fetchAdvanced(_, { call, put }) {
-      const response = yield call(queryAdvancedProfile);
+      const response = yield call(queryProjectWorkflow);
       yield put({
         type: 'show',
         payload: response,
