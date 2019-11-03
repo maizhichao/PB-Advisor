@@ -208,9 +208,7 @@ const columns = [
     title: '工序',
     dataIndex: 'type',
     key: 'type',
-    render: text => {
-      return <Tag>{text}</Tag>;
-    },
+    render: text => <Tag>{text}</Tag>,
   },
   {
     title: '在生产件数',
