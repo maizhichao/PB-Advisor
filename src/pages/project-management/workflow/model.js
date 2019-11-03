@@ -1,22 +1,24 @@
-import { queryTags } from './service';
+import { queryAdvancedProfile } from './service';
 
 const Model = {
-  namespace: 'dashboardAndmonitor',
+  namespace: 'profileAndadvanced',
   state: {
-    tags: [],
+    advancedOperation1: [],
+    advancedOperation2: [],
+    advancedOperation3: [],
   },
   effects: {
-    *fetchTags(_, { call, put }) {
-      const response = yield call(queryTags);
+    *fetchAdvanced(_, { call, put }) {
+      const response = yield call(queryAdvancedProfile);
       yield put({
-        type: 'saveTags',
-        payload: response.list,
+        type: 'show',
+        payload: response,
       });
     },
   },
   reducers: {
-    saveTags(state, action) {
-      return { ...state, tags: action.payload };
+    show(state, { payload }) {
+      return { ...state, ...payload };
     },
   },
 };

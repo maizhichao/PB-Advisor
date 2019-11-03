@@ -1,300 +1,147 @@
-import { Card, Col, Row, Statistic, Tooltip } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
+import { Progress, Card, Icon, Steps, Table } from 'antd';
+import { GridContent, PageHeaderWrapper, RouteContext } from '@ant-design/pro-layout';
 import React, { Component } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
 import { connect } from 'dva';
-import numeral from 'numeral';
-import { Pie, WaterWave, Gauge, TagCloud } from './components/Charts';
-import ActiveChart from './components/ActiveChart';
+import IntroduceRow from './IntroduceRow';
 import styles from './style.less';
 
-const { Countdown } = Statistic;
-const targetTime = new Date().getTime() + 3900000;
+const { Step } = Steps;
 
-@connect(({ dashboardAndmonitor, loading }) => ({
-  dashboardAndmonitor,
-  loading: loading.models.dashboardAndmonitor,
+const columns = [
+  {
+    title: '项目',
+    dataIndex: 'projectName',
+    key: 'projectName',
+  },
+  {
+    title: '数量',
+    dataIndex: 'number',
+    key: 'number',
+  },
+  {
+    title: '进度',
+    dataIndex: 'progress',
+    key: 'progress',
+    render: value => <Progress active percent={value} size="smal" />,
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+  },
+  {
+    title: '备注',
+    dataIndex: 'memo',
+    key: 'memo',
+  },
+];
+
+const workflowSteps = [
+  {
+    key: 0,
+    title: '钣金',
+    icon: 'radius-upright',
+  },
+  {
+    key: 1,
+    title: '框架',
+    icon: 'gateway',
+  },
+  {
+    key: 2,
+    title: '钢排',
+    icon: 'build',
+  },
+  {
+    key: 3,
+    title: '一次',
+    icon: 'number',
+  },
+  {
+    key: 4,
+    title: '二次',
+    icon: 'table',
+  },
+  {
+    key: 5,
+    title: '测试',
+    icon: 'security-scan',
+  },
+  {
+    key: 6,
+    title: '包装',
+    icon: 'code-sandbox',
+  },
+];
+
+@connect(({ profileAndadvanced, loading }) => ({
+  profileAndadvanced,
+  loading: loading.effects['profileAndadvanced/fetchAdvanced'],
 }))
-class Monitor extends Component {
+class Advanced extends Component {
+  state = {
+    currentStep: 0,
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'dashboardAndmonitor/fetchTags',
+      type: 'profileAndadvanced/fetchAdvanced',
     });
   }
 
+  onStepChange = currentStep => {
+    this.setState({ currentStep });
+  };
+
   render() {
-    const { dashboardAndmonitor, loading } = this.props;
-    const { tags } = dashboardAndmonitor;
+    const { profileAndadvanced, loading } = this.props;
+    const { advancedOperation1 } = profileAndadvanced;
+
     return (
-      <GridContent>
-        <React.Fragment>
-          <Row gutter={24}>
-            <Col
-              xl={18}
-              lg={24}
-              md={24}
-              sm={24}
-              xs={24}
+      <PageHeaderWrapper className={styles.pageHeader}>
+        <div className={styles.main}>
+          <GridContent>
+            <Card
               style={{
-                marginBottom: 24,
+                marginBottom: 10,
               }}
             >
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.trading-activity"
-                    defaultMessage="Real-Time Trading Activity"
-                  />
-                }
-                bordered={false}
-              >
-                <Row>
-                  <Col md={6} sm={12} xs={24}>
-                    <Statistic
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.total-transactions"
-                          defaultMessage="Total transactions today"
-                        />
-                      }
-                      suffix="元"
-                      value={numeral(124543233).format('0,0')}
-                    />
-                  </Col>
-                  <Col md={6} sm={12} xs={24}>
-                    <Statistic
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.sales-target"
-                          defaultMessage="Sales target completion rate"
-                        />
-                      }
-                      value="92%"
-                    />
-                  </Col>
-                  <Col md={6} sm={12} xs={24}>
-                    <Statistic
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.remaining-time"
-                          defaultMessage="Remaining time of activity"
-                        />
-                      }
-                    >
-                      <Countdown value={targetTime} />
-                    </Statistic>
-                  </Col>
-                  <Col md={6} sm={12} xs={24}>
-                    <Statistic
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.total-transactions-per-second"
-                          defaultMessage="Total transactions per second"
-                        />
-                      }
-                      suffix="元"
-                      value={numeral(234).format('0,0')}
-                    />
-                  </Col>
-                </Row>
-                <div className={styles.mapChart}>
-                  <Tooltip
-                    title={
-                      <FormattedMessage
-                        id="dashboardandmonitor.monitor.waiting-for-implementation"
-                        defaultMessage="Waiting for implementation"
-                      />
-                    }
+              <RouteContext.Consumer>
+                {({ isMobile }) => (
+                  <Steps
+                    size="small"
+                    direction={isMobile ? 'vertical' : 'horizontal'}
+                    type="navigation"
+                    current={this.state.currentStep}
+                    onChange={this.onStepChange}
                   >
-                    <img
-                      src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png"
-                      alt="map"
-                    />
-                  </Tooltip>
-                </div>
-              </Card>
-            </Col>
-            <Col xl={6} lg={24} md={24} sm={24} xs={24}>
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.activity-forecast"
-                    defaultMessage="Activity forecast"
-                  />
-                }
-                style={{
-                  marginBottom: 24,
-                }}
-                bordered={false}
-              >
-                <ActiveChart />
-              </Card>
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.efficiency"
-                    defaultMessage="Efficiency"
-                  />
-                }
-                style={{
-                  marginBottom: 24,
-                }}
-                bodyStyle={{
-                  textAlign: 'center',
-                }}
-                bordered={false}
-              >
-                <Gauge
-                  title={formatMessage({
-                    id: 'dashboardandmonitor.monitor.ratio',
-                    defaultMessage: 'Ratio',
-                  })}
-                  height={180}
-                  percent={87}
-                />
-              </Card>
-            </Col>
-          </Row>
-          <Row gutter={24}>
-            <Col
-              xl={12}
-              lg={24}
-              sm={24}
-              xs={24}
-              style={{
-                marginBottom: 24,
-              }}
-            >
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.proportion-per-category"
-                    defaultMessage="Proportion Per Category"
-                  />
-                }
-                bordered={false}
-                className={styles.pieCard}
-              >
-                <Row
-                  style={{
-                    padding: '16px 0',
-                  }}
-                >
-                  <Col span={8}>
-                    <Pie
-                      animate={false}
-                      percent={28}
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.fast-food"
-                          defaultMessage="Fast food"
-                        />
-                      }
-                      total="28%"
-                      height={128}
-                      lineWidth={2}
-                    />
-                  </Col>
-                  <Col span={8}>
-                    <Pie
-                      animate={false}
-                      color="#5DDECF"
-                      percent={22}
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.western-food"
-                          defaultMessage="Western food"
-                        />
-                      }
-                      total="22%"
-                      height={128}
-                      lineWidth={2}
-                    />
-                  </Col>
-                  <Col span={8}>
-                    <Pie
-                      animate={false}
-                      color="#2FC25B"
-                      percent={32}
-                      title={
-                        <FormattedMessage
-                          id="dashboardandmonitor.monitor.hot-pot"
-                          defaultMessage="Hot pot"
-                        />
-                      }
-                      total="32%"
-                      height={128}
-                      lineWidth={2}
-                    />
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-            <Col
-              xl={6}
-              lg={12}
-              sm={24}
-              xs={24}
-              style={{
-                marginBottom: 24,
-              }}
-            >
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.popular-searches"
-                    defaultMessage="Popular Searches"
-                  />
-                }
+                    {workflowSteps.map(step => (
+                      <Step
+                        key={step.key}
+                        icon={<Icon type={step.icon} />}
+                        status={this.state.currentStep === step.key ? 'process' : 'wait'}
+                        title={step.title}
+                      />
+                    ))}
+                  </Steps>
+                )}
+              </RouteContext.Consumer>
+            </Card>
+            <IntroduceRow loading={false} />
+            <Card className={styles.tabsCard} bordered={false}>
+              <Table
+                pagination={false}
                 loading={loading}
-                bordered={false}
-                bodyStyle={{
-                  overflow: 'hidden',
-                }}
-              >
-                <TagCloud data={tags || []} height={161} />
-              </Card>
-            </Col>
-            <Col
-              xl={6}
-              lg={12}
-              sm={24}
-              xs={24}
-              style={{
-                marginBottom: 24,
-              }}
-            >
-              <Card
-                title={
-                  <FormattedMessage
-                    id="dashboardandmonitor.monitor.resource-surplus"
-                    defaultMessage="Resource Surplus"
-                  />
-                }
-                bodyStyle={{
-                  textAlign: 'center',
-                  fontSize: 0,
-                }}
-                bordered={false}
-              >
-                <WaterWave
-                  height={161}
-                  title={
-                    <FormattedMessage
-                      id="dashboardandmonitor.monitor.fund-surplus"
-                      defaultMessage="Fund Surplus"
-                    />
-                  }
-                  percent={34}
-                />
-              </Card>
-            </Col>
-          </Row>
-        </React.Fragment>
-      </GridContent>
+                dataSource={advancedOperation1}
+                columns={columns}
+              />
+            </Card>
+          </GridContent>
+        </div>
+      </PageHeaderWrapper>
     );
   }
 }
 
-export default Monitor;
+export default Advanced;

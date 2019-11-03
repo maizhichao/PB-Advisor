@@ -1,81 +1,24 @@
-import { fakeChartData, queryActivities, queryCurrent, queryProjectNotice } from './service';
+import { queryAdvancedProfile } from './service';
 
 const Model = {
-  namespace: 'dashboardAndworkplace',
+  namespace: 'profileAndadvanced',
   state: {
-    currentUser: {},
-    projectNotice: [],
-    activities: [],
-    radarData: [],
+    advancedOperation1: [],
+    advancedOperation2: [],
+    advancedOperation3: [],
   },
   effects: {
-    *init(_, { put }) {
+    *fetchAdvanced(_, { call, put }) {
+      const response = yield call(queryAdvancedProfile);
       yield put({
-        type: 'fetchUserCurrent',
-      });
-      yield put({
-        type: 'fetchProjectNotice',
-      });
-      yield put({
-        type: 'fetchActivitiesList',
-      });
-      yield put({
-        type: 'fetchChart',
-      });
-    },
-
-    *fetchUserCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
-      yield put({
-        type: 'save',
-        payload: {
-          currentUser: response,
-        },
-      });
-    },
-
-    *fetchProjectNotice(_, { call, put }) {
-      const response = yield call(queryProjectNotice);
-      yield put({
-        type: 'save',
-        payload: {
-          projectNotice: Array.isArray(response) ? response : [],
-        },
-      });
-    },
-
-    *fetchActivitiesList(_, { call, put }) {
-      const response = yield call(queryActivities);
-      yield put({
-        type: 'save',
-        payload: {
-          activities: Array.isArray(response) ? response : [],
-        },
-      });
-    },
-
-    *fetchChart(_, { call, put }) {
-      const { radarData } = yield call(fakeChartData);
-      yield put({
-        type: 'save',
-        payload: {
-          radarData,
-        },
+        type: 'show',
+        payload: response,
       });
     },
   },
   reducers: {
-    save(state, { payload }) {
+    show(state, { payload }) {
       return { ...state, ...payload };
-    },
-
-    clear() {
-      return {
-        currentUser: {},
-        projectNotice: [],
-        activities: [],
-        radarData: [],
-      };
     },
   },
 };

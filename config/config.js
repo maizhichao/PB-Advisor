@@ -122,18 +122,17 @@ export default {
                   name: 'overview',
                   component: './project-management/overview',
                 },
-
-                {
-                  path: '/project/workflow',
-                  icon: 'sliders',
-                  name: 'workflow',
-                  component: './project-management/workflow',
-                },
                 {
                   path: '/project/details',
                   icon: 'schedule',
                   name: 'details',
                   component: './project-management/details',
+                },
+                {
+                  path: '/project/workflow',
+                  icon: 'sliders',
+                  name: 'workflow',
+                  component: './project-management/workflow',
                 },
               ],
             },

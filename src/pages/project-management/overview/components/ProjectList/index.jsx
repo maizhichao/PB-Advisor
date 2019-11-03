@@ -430,7 +430,11 @@ class BasicList extends Component {
                       ]}
                     >
                       <List.Item.Meta
-                        avatar={<Avatar src={item.logo} shape="circle" size="default" />}
+                        avatar={
+                          <Avatar shape="circle" size="default">
+                            {item.logo}
+                          </Avatar>
+                        }
                         title={<a href={item.href}>{item.title}</a>}
                         description={item.subDescription}
                       />
