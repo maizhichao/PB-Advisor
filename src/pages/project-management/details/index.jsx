@@ -72,14 +72,14 @@ const description = (
   <RouteContext.Consumer>
     {({ isMobile }) => (
       <Descriptions className={styles.headerList} size="small" column={isMobile ? 1 : 2}>
-        <Descriptions.Item label="负责人">刘尊义</Descriptions.Item>
+        <Descriptions.Item label="项目经理">刘尊义</Descriptions.Item>
         <Descriptions.Item label="客户">普锐斯玛</Descriptions.Item>
         <Descriptions.Item label="创建时间">2019-09-15</Descriptions.Item>
         <Descriptions.Item label="项目编号">
           <a href="">WJ12421</a>
         </Descriptions.Item>
         <Descriptions.Item label="计划交付日期">2019-12-01</Descriptions.Item>
-        <Descriptions.Item label="预计交付日期">2020-01-01 ~ 2020-01-07</Descriptions.Item>
+        <Descriptions.Item label="预计交付日期">2020-01-07</Descriptions.Item>
       </Descriptions>
     )}
   </RouteContext.Consumer>
@@ -125,7 +125,7 @@ const purchaseDesc = (
       />
     </Fragment>
     <div>
-      <a href="">通知元件到货</a>
+      <a href="">确认按计划齐套</a>
     </div>
   </div>
 );
@@ -200,7 +200,7 @@ const operationTabList = [
   },
   {
     key: 'tab4',
-    tab: '完成',
+    tab: '测试',
   },
 ];
 const columns = [
@@ -211,7 +211,7 @@ const columns = [
     render: text => <Tag>{text}</Tag>,
   },
   {
-    title: '在生产件数',
+    title: '实际工时',
     dataIndex: 'number',
     key: 'number',
   },
@@ -224,7 +224,7 @@ const columns = [
         return <Badge status="success" text="正常" />;
       }
 
-      return <Badge status="error" text="异常" />;
+      return <Badge status="error" text="损失" />;
     },
   },
   {

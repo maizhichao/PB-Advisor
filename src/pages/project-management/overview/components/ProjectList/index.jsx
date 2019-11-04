@@ -34,7 +34,7 @@ const { Search, TextArea } = Input;
 const projectState = [
   {
     key: 1,
-    state: '未开始',
+    state: '待生产',
     color: '#f50',
     count: 10,
   },
@@ -65,7 +65,7 @@ const projectState = [
   },
   {
     key: 6,
-    state: '钢排',
+    state: '铜排',
     color: 'gold',
     count: 7,
   },
@@ -96,7 +96,7 @@ const projectState = [
   },
   {
     key: 11,
-    state: '已完成',
+    state: '待交付',
     color: '#87d068',
     count: 30,
   },
@@ -208,8 +208,8 @@ class BasicList extends Component {
       if (key === 'edit') this.showEditModal(currentItem);
       else if (key === 'delete') {
         Modal.confirm({
-          title: '删除任务',
-          content: '确定删除该任务吗？',
+          title: '删除项目',
+          content: '确定删除该项目吗？',
           okText: '确认',
           cancelText: '取消',
           onOk: () => this.deleteItem(currentItem.id),
@@ -249,12 +249,16 @@ class BasicList extends Component {
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
       <div className={styles.listContent}>
         <div className={styles.listContentItem}>
-          <span>负责人</span>
+          <span>项目经理</span>
           <p>{owner}</p>
         </div>
         <div className={styles.listContentItem}>
-          <span>开始时间</span>
-          <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
+          <span>开工时间</span>
+          <p>{moment(createdAt).format('YYYY-MM-DD')}</p>
+        </div>
+        <div className={styles.listContentItem}>
+          <span>完工时间</span>
+          <p>{moment(createdAt).format('YYYY-MM-DD')}</p>
         </div>
         <div className={styles.listContentItem}>
           <Progress
@@ -334,12 +338,12 @@ class BasicList extends Component {
               />,
             )}
           </FormItem>
-          <FormItem label="负责人" {...this.formLayout}>
+          <FormItem label="项目经理" {...this.formLayout}>
             {getFieldDecorator('owner', {
               rules: [
                 {
                   required: true,
-                  message: '请选择负责人',
+                  message: '请选择项目经理',
                 },
               ],
               initialValue: current.owner,
@@ -448,7 +452,7 @@ class BasicList extends Component {
         </div>
 
         <Modal
-          title={done ? null : `任务${current ? '编辑' : '添加'}`}
+          title={done ? null : `项目${current ? '编辑' : '添加'}`}
           className={styles.standardListForm}
           width={640}
           bodyStyle={

@@ -49,7 +49,7 @@ const workflowSteps = [
   },
   {
     key: 2,
-    title: '钢排',
+    title: '铜排',
     icon: 'build',
   },
   {

@@ -144,7 +144,7 @@ const IntroduceRow = ({ loading }) => (
           <Col span={12}>
             <Card bordered={false}>
               <Statistic
-                title="人工"
+                title="KE"
                 bordered={false}
                 value="80%"
                 precision={0}
@@ -154,7 +154,7 @@ const IntroduceRow = ({ loading }) => (
           </Col>
           <Col span={12}>
             <Card bordered={false}>
-              <Statistic title="钣金" value="50%" valueStyle={{ color: 'red' }} />
+              <Statistic title="OEE" value="50%" valueStyle={{ color: 'red' }} />
             </Card>
           </Col>
         </Row>
