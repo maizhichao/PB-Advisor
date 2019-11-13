@@ -18,10 +18,12 @@ import {
   Result,
   Timeline,
   Tag,
+  Calendar,
 } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { findDOMNode } from 'react-dom';
+import { RouteContext } from '@ant-design/pro-layout';
 import moment from 'moment';
 import styles from './style.less';
 
@@ -288,6 +290,70 @@ class BasicList extends Component {
       </Dropdown>
     );
 
+    const projectListContent = (
+      <>
+        <Button
+          type="dashed"
+          style={{
+            width: '100%',
+            marginBottom: 8,
+          }}
+          icon="plus"
+          onClick={this.showModal}
+          ref={component => {
+            // eslint-disable-next-line  react/no-find-dom-node
+            this.addBtn = findDOMNode(component);
+          }}
+        >
+          添加
+        </Button>
+        <List
+          size="large"
+          rowKey="id"
+          loading={loading}
+          pagination={paginationProps}
+          dataSource={list}
+          renderItem={item => (
+            <List.Item
+              actions={[
+                <a
+                  key="edit"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.showEditModal(item);
+                  }}
+                >
+                  编辑
+                </a>,
+                <MoreBtn key="more" item={item} />,
+              ]}
+            >
+              <Card
+                avatar={
+                  <Avatar shape="circle" size="default">
+                    {item.logo}
+                  </Avatar>
+                }
+                title={<a href={item.href}>{item.title}</a>}
+              >
+                {item.subDescription}
+              </Card>
+              {/* <List.Item.Meta
+                avatar={
+                  <Avatar shape="circle" size="default">
+                    {item.logo}
+                  </Avatar>
+                }
+                title={<a href={item.href}>{item.title}</a>}
+                description={item.subDescription}
+              />
+              <ListContent data={item} /> */}
+            </List.Item>
+          )}
+        />
+      </>
+    );
+
     const getModalContent = () => {
       if (done) {
         return (
@@ -373,104 +439,62 @@ class BasicList extends Component {
     };
 
     return (
-      <>
-        <div className={styles.standardList}>
-          <Card
-            className={styles.listCard}
-            bordered={false}
-            title="项目清单"
-            bodyStyle={{
-              padding: '0 32px 40px 32px',
-            }}
-            extra={extraContent}
-          >
-            <Row gutter={24}>
-              <Col span={2} style={{ paddingRight: 5, marginTop: 5 }}>
-                <Timeline>
-                  {projectState.map(item => (
-                    <Timeline.Item key={item.key} color={item.tagColor || item.color}>
-                      <Tag>
-                        {item.state} <b>{item.count}</b>
-                      </Tag>
-                    </Timeline.Item>
-                  ))}
-                </Timeline>
-              </Col>
-              <Col span={22}>
-                <Button
-                  type="dashed"
-                  style={{
-                    width: '100%',
-                    marginBottom: 8,
-                  }}
-                  icon="plus"
-                  onClick={this.showModal}
-                  ref={component => {
-                    // eslint-disable-next-line  react/no-find-dom-node
-                    this.addBtn = findDOMNode(component);
-                  }}
-                >
-                  添加
-                </Button>
-                <List
-                  size="large"
-                  rowKey="id"
-                  loading={loading}
-                  pagination={paginationProps}
-                  dataSource={list}
-                  renderItem={item => (
-                    <List.Item
-                      actions={[
-                        <a
-                          key="edit"
-                          onClick={e => {
-                            e.preventDefault();
-                            this.showEditModal(item);
-                          }}
-                        >
-                          编辑
-                        </a>,
-                        <MoreBtn key="more" item={item} />,
-                      ]}
-                    >
-                      <List.Item.Meta
-                        avatar={
-                          <Avatar shape="circle" size="default">
-                            {item.logo}
-                          </Avatar>
-                        }
-                        title={<a href={item.href}>{item.title}</a>}
-                        description={item.subDescription}
-                      />
-                      <ListContent data={item} />
-                    </List.Item>
-                  )}
-                />
-              </Col>
-            </Row>
-          </Card>
-        </div>
+      <RouteContext.Consumer>
+        {({ isMobile }) => (
+          <div className={styles.standardList}>
+            <Card
+              className={styles.listCard}
+              bordered={false}
+              title="项目清单"
+              bodyStyle={{
+                padding: '0 32px 40px 32px',
+              }}
+              extra={extraContent}
+            >
+              <Row gutter={24}>
+                {isMobile ? (
+                  projectListContent
+                ) : (
+                  <>
+                    <Col span={2} style={{ paddingRight: 5, marginTop: 5 }}>
+                      <Timeline>
+                        {projectState.map(item => (
+                          <Timeline.Item key={item.key} color={item.tagColor || item.color}>
+                            <Tag>
+                              {item.state} <b>{item.count}</b>
+                            </Tag>
+                          </Timeline.Item>
+                        ))}
+                      </Timeline>
+                    </Col>
+                    <Col span={22}>{projectListContent}</Col>
+                  </>
+                )}
+              </Row>
+            </Card>
 
-        <Modal
-          title={done ? null : `项目${current ? '编辑' : '添加'}`}
-          className={styles.standardListForm}
-          width={640}
-          bodyStyle={
-            done
-              ? {
-                  padding: '72px 0',
-                }
-              : {
-                  padding: '28px 0 0',
-                }
-          }
-          destroyOnClose
-          visible={visible}
-          {...modalFooter}
-        >
-          {getModalContent()}
-        </Modal>
-      </>
+            <Modal
+              title={done ? null : `项目${current ? '编辑' : '添加'}`}
+              className={styles.standardListForm}
+              width={640}
+              bodyStyle={
+                done
+                  ? {
+                      padding: '72px 0',
+                    }
+                  : {
+                      padding: '28px 0 0',
+                    }
+              }
+              destroyOnClose
+              visible={visible}
+              {...modalFooter}
+            >
+              {getModalContent()}
+            </Modal>
+          </div>
+        )}
+      </RouteContext.Consumer>
     );
   }
 }

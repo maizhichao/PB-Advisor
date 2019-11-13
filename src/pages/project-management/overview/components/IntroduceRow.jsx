@@ -6,7 +6,7 @@ import Trend from './Trend';
 import styles from '../style.less';
 
 const topColResponsiveProps = {
-  xs: 32,
+  xs: 24,
   sm: 16,
   md: 16,
   lg: 16,
@@ -119,7 +119,7 @@ const IntroduceRow = ({ loading }) => (
           <Col span={12}>
             <Card bordered={false}>
               <Statistic
-                title="成本"
+                title="生产成本"
                 value={37.28}
                 precision={2}
                 valueStyle={{ color: '#cf1322' }}
