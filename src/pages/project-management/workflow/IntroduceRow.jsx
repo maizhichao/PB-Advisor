@@ -104,7 +104,7 @@ const IntroduceRow = ({ loading }) => (
       >
         <Row type="flex" justify="space-around">
           <Col span={12}>
-            <Card bordered={false}>
+            <Card bordered={false} bodyStyle={{ padding: '24px 12px' }}>
               <Statistic
                 title="检验及时率"
                 bordered={false}
@@ -115,7 +115,7 @@ const IntroduceRow = ({ loading }) => (
             </Card>
           </Col>
           <Col span={12}>
-            <Card bordered={false}>
+            <Card bordered={false} bodyStyle={{ padding: '24px 12px' }}>
               <Statistic title="一次合格率" value="92%" valueStyle={{ color: '#3DCD58' }} />
             </Card>
           </Col>

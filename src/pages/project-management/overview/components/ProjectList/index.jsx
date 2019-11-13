@@ -244,8 +244,8 @@ class BasicList extends Component {
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      pageSize: 5,
-      total: 50,
+      pageSize: 8,
+      total: 20,
     };
 
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
@@ -290,7 +290,7 @@ class BasicList extends Component {
       </Dropdown>
     );
 
-    const projectListContent = (
+    const projectListContent = isMobile => (
       <>
         <Button
           type="dashed"
@@ -328,26 +328,36 @@ class BasicList extends Component {
                 <MoreBtn key="more" item={item} />,
               ]}
             >
-              <Card
-                avatar={
-                  <Avatar shape="circle" size="default">
-                    {item.logo}
-                  </Avatar>
-                }
-                title={<a href={item.href}>{item.title}</a>}
-              >
-                {item.subDescription}
-              </Card>
-              {/* <List.Item.Meta
-                avatar={
-                  <Avatar shape="circle" size="default">
-                    {item.logo}
-                  </Avatar>
-                }
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.subDescription}
-              />
-              <ListContent data={item} /> */}
+              {isMobile ? (
+                <Card hoverable>
+                  <Card.Meta
+                    avatar={
+                      <Avatar shape="circle" size="default">
+                        {item.logo}
+                      </Avatar>
+                    }
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={
+                      <>
+                        {item.subDescription} <ListContent data={item} />
+                      </>
+                    }
+                  />
+                </Card>
+              ) : (
+                <>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar shape="circle" size="default">
+                        {item.logo}
+                      </Avatar>
+                    }
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={item.subDescription}
+                  />
+                  <ListContent data={item} />
+                </>
+              )}
             </List.Item>
           )}
         />
@@ -453,7 +463,7 @@ class BasicList extends Component {
             >
               <Row gutter={24}>
                 {isMobile ? (
-                  projectListContent
+                  projectListContent(isMobile)
                 ) : (
                   <>
                     <Col span={2} style={{ paddingRight: 5, marginTop: 5 }}>
@@ -467,7 +477,7 @@ class BasicList extends Component {
                         ))}
                       </Timeline>
                     </Col>
-                    <Col span={22}>{projectListContent}</Col>
+                    <Col span={22}>{projectListContent(isMobile)}</Col>
                   </>
                 )}
               </Row>
