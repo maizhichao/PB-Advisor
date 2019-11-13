@@ -27,11 +27,7 @@ const menu = (
 );
 const mobileMenu = (
   <Menu>
-    <Menu.Item key="1">操作一</Menu.Item>
-    <Menu.Item key="2">操作二</Menu.Item>
-    <Menu.Item key="3">选项一</Menu.Item>
-    <Menu.Item key="4">选项二</Menu.Item>
-    <Menu.Item key="">选项三</Menu.Item>
+    <Menu.Item key="1">删除</Menu.Item>
   </Menu>
 );
 const action = (
@@ -45,7 +41,7 @@ const action = (
             overlay={mobileMenu}
             placement="bottomRight"
           >
-            主操作
+            编辑
           </Dropdown.Button>
         );
       }
