@@ -72,7 +72,7 @@ const PageHeaderContent = ({ currentUser }) => {
 const ExtraContent = () => (
   <div className={styles.extraContent}>
     <div className={styles.statItem}>
-      <Statistic title="客户" value="普锐斯玛" />
+      <Statistic title="客户" value="瑞康医药" />
     </div>
     <div className={styles.statItem}>
       <Statistic title="数量" value={8} suffix="/ 24" />

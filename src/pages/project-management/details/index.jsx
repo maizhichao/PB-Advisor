@@ -69,7 +69,7 @@ const description = (
     {({ isMobile }) => (
       <Descriptions className={styles.headerList} size="small" column={isMobile ? 1 : 2}>
         <Descriptions.Item label="项目经理">刘尊义</Descriptions.Item>
-        <Descriptions.Item label="客户">普锐斯玛</Descriptions.Item>
+        <Descriptions.Item label="客户">瑞康医药</Descriptions.Item>
         <Descriptions.Item label="创建时间">2019-09-15</Descriptions.Item>
         <Descriptions.Item label="项目编号">
           <a href="">WJ12421</a>
@@ -297,7 +297,7 @@ class Advanced extends Component {
     };
     return (
       <PageHeaderWrapper
-        title="名称：普锐斯玛盘柜一期生产"
+        title="名称：瑞康医药二期"
         extra={action}
         className={styles.pageHeader}
         content={description}
